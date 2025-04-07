@@ -1,0 +1,67 @@
+/* Change Login Card Header Background */
+.card-header {
+    background-color: #2C3E50 !important; /* Dark Blue */
+    color: #ECF0F1 !important; /* Light Grey */
+    text-align: center;
+}
+
+/* Change Login Button */
+.btn-primary {
+    background-color: #2C3E50 !important; /* Blue */
+    border-color: #2C3E50 !important; /* Darker Blue */
+}
+
+.btn-primary:hover {
+    background-color: #1A5276 !important; /* Even Darker Blue */
+}
+
+/* Modify Input Fields */
+.form-control {
+    border-radius: 5px;
+    border: 1px solid #BDC3C7;
+}
+
+/* Improve Card Styling */
+.card {
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Adjust Container for a More Centered Look */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:1000px;
+    min-height: 100vh;
+}
+/*
+.card {
+    border-radius: 10px;
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.list-group-item {
+    border: none;
+}
+*/
+
+
+/*Second content page with FAQs
+.card {
+    border-radius: 10px;
+    box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.1);
+}
+
+.bg-info, .bg-warning, .bg-danger {
+    color: #fff !important;
+}
+
+.accordion-button {
+    font-weight: bold;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #007bff;
+    color: white;
+}*/
