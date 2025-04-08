@@ -78,13 +78,19 @@
               </tr>
           </thead>
           <tbody>
-              @foreach (Auth::user()->allocations as $allocation)
-                  <tr>
-                      <td>{{ $allocation->stationery->name }}</td>
-                      <td>{{ $allocation->quantity }}</td>
-                      <td>{{ ucfirst($allocation->status) }}</td>
-                  </tr>
-              @endforeach
+            @if (Auth::user()->allocations && count(Auth::user()->allocations) > 0)
+            @foreach (Auth::user()->allocations as $allocation)
+                <tr>
+                    <td>{{ $allocation->stationery->name }}</td>
+                    <td>{{ $allocation->quantity }}</td>
+                    <td>{{ ucfirst($allocation->status) }}</td>
+                </tr>
+            @endforeach
+        @else
+            <tr>
+                <td colspan="3">No deliveries found.</td>
+            </tr>
+        @endif
           </tbody>
       </table>
   </div>

@@ -48,4 +48,9 @@ class User extends Authenticatable
     return $this->hasMany(Allocation::class, 'contractor_id');
     }
 
+    public function allocations()
+    {
+    return $this->hasMany(Allocation::class, 'school_id');
+    }
+
 }
