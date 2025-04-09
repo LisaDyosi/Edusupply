@@ -8,17 +8,6 @@
     <!-- Sidebar -->
     <div class="sidebar">
 
-      <!-- SidebarSearch Form -->
-      {{-- <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div> --}}
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -59,7 +48,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('school.upcoming.deliveries') }}" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Upcoming Deliveries

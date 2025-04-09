@@ -65,7 +65,7 @@
         </div>
     </section>
 </div>
-
+{{-- 
 <div class="container">
   <h3 class="text-primary">🚚 My Deliveries</h3>
   <table class="table">
@@ -88,49 +88,8 @@
           @endforeach
       </tbody>
   </table>
-</div> 
+</div>  --}}
 
-<div class="container">
-  <h3 class="text-primary">🚚 My Deliveries</h3>
-  <table class="table">
-      <thead>
-          <tr>
-              <th>School</th>
-              <th>Stationery</th>
-              <th>Quantity</th>
-              <th>Status</th>
-              <th>Action</th>
-          </tr>
-      </thead>
-      <tbody>
-          @foreach (Auth::user()->deliveries as $delivery)
-              <tr>
-                  <td>{{ $delivery->school->name }}</td>
-                  <td>{{ $delivery->stationery->name }}</td>
-                  <td>{{ $delivery->quantity }}</td>
-                  <td>{{ ucfirst($delivery->status) }}</td>
-                  {{-- <td>
-                      @if ($delivery->status === 'pending')
-                          <form action="{{ route('allocation.updateStatus', $delivery->id) }}" method="POST">
-                              @csrf
-                              @method('PUT')
-                              <input type="hidden" name="status" value="in_transit">
-                              <button type="submit" class="btn btn-warning">Mark as In Transit</button>
-                          </form>
-                      @elseif ($delivery->status === 'in_transit')
-                          <form action="{{ route('allocation.updateStatus', $delivery->id) }}" method="POST">
-                              @csrf
-                              @method('PUT')
-                              <input type="hidden" name="status" value="delivered">
-                              <button type="submit" class="btn btn-success">Mark as Delivered</button>
-                          </form>
-                      @endif
-                  </td> --}}
-              </tr>
-          @endforeach
-      </tbody>
-  </table>
-</div>
 <style>
 
 .content { 

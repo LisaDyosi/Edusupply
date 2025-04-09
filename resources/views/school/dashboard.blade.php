@@ -66,34 +66,6 @@
             <button class="btn">Log Missing Items</button>
         </div>
     </section>
-    
-    <div class="container">
-      <h3 class="text-primary">📦 Upcoming Deliveries</h3>
-      <table class="table">
-          <thead>
-              <tr>
-                  <th>Stationery</th>
-                  <th>Quantity</th>
-                  <th>Status</th>
-              </tr>
-          </thead>
-          <tbody>
-            @if (Auth::user()->allocations && count(Auth::user()->allocations) > 0)
-            @foreach (Auth::user()->allocations as $allocation)
-                <tr>
-                    <td>{{ $allocation->stationery->name }}</td>
-                    <td>{{ $allocation->quantity }}</td>
-                    <td>{{ ucfirst($allocation->status) }}</td>
-                </tr>
-            @endforeach
-        @else
-            <tr>
-                <td colspan="3">No deliveries found.</td>
-            </tr>
-        @endif
-          </tbody>
-      </table>
-  </div>
 </div> 
 
 <style>

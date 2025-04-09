@@ -46,3 +46,16 @@ Route::middleware(['auth', 'checkRole:department'])->group(function () {
     Route::get('/allocations/create', [AllocationController::class, 'create'])->name('allocation.create');
     Route::post('/allocations/store', [AllocationController::class, 'store'])->name('allocation.store');
 });
+
+Route::middleware(['auth', 'checkRole:school'])->group(function () {
+    Route::get('/school/upcoming-deliveries', function () {
+        return view('school.upcoming-deliveries');
+    })->name('school.upcoming.deliveries');
+});
+
+Route::middleware(['auth', 'checkRole:contractor'])->group(function () {
+    Route::get('/contractor/my-deliveries', function () {
+        return view('contractor.my-deliveries');
+    })->name('contractor.my.deliveries');
+});
+
