@@ -47,22 +47,34 @@ class AllocationController extends Controller
     }
 
     public function myDeliveries()
-{
+    {
+
     $deliveries = Auth::user()->deliveries()->with(['school', 'stationery'])->get();
 
     return view('contractor.my-deliveries', compact('deliveries'));
-}
+    }
 
     public function updateStatus(Request $request, $id)
-{
+    {
     $request->validate([
         'status' => 'required|in:in_transit,delivered',
     ]);
 
+    
     $allocation = Allocation::findOrFail($id);
 
     if (Auth::user()->role === 'contractor') {
-        $allocation->update(['status' => $request->status]);
+        if ($request->status === 'in_transit') {
+            $code = rand(10000, 99999);
+            $allocation->update([
+                'status' => 'in_transit',
+                'confirmation_code' => $code
+            ]);
+        } elseif ($request->status === 'delivered') {
+            // Only allow status change to delivered through the new method with code
+            return back()->withErrors(['error' => 'Use the confirmation code to mark as delivered.']);
+        }
+
         return back()->with('success', 'Delivery status updated');
     }
 
@@ -76,6 +88,26 @@ public function confirmDelivery($id)
     if (Auth::user()->role === 'school' && $allocation->status === 'delivered') {
         $allocation->update(['status' => 'confirmed']);
         return back()->with('success', 'Delivery confirmed');
+    }
+
+    return back()->withErrors(['error' => 'Unauthorized action']);
+}
+
+public function confirmWithCode(Request $request, $id)
+{
+    $request->validate([
+        'confirmation_code' => 'required|string',
+    ]);
+
+    $allocation = Allocation::findOrFail($id);
+
+    if (Auth::user()->role === 'contractor') {
+        if ($allocation->confirmation_code === $request->confirmation_code) {
+            $allocation->update(['status' => 'delivered']);
+            return back()->with('success', 'Package marked as delivered');
+        } else {
+            return back()->withErrors(['error' => 'Invalid confirmation code']);
+        }
     }
 
     return back()->withErrors(['error' => 'Unauthorized action']);

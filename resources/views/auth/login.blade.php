@@ -41,7 +41,7 @@
 
     .login-container {
         width: 100%;
-        max-height: 500px;
+        max-height: 300px;
         border-radius: 10px;
     }
 

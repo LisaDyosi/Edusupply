@@ -15,21 +15,19 @@ class Allocation extends Model
         'contractor_id',
         'quantity',
         'status',
+        'confirmation_code'
     ];
 
-    // 🧩 Add this for the stationery relationship
     public function stationery()
     {
         return $this->belongsTo(Stationery::class);
     }
 
-    // 🏫 For school
     public function school()
     {
         return $this->belongsTo(User::class, 'school_id');
     }
 
-    // 👷 For contractor
     public function contractor()
     {
         return $this->belongsTo(User::class, 'contractor_id');

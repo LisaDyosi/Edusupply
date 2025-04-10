@@ -37,14 +37,11 @@
                                 <button type="submit" class="btn btn-warning btn-sm">Mark as In Transit</button>
                             </form>
                         @elseif ($delivery->status === 'in_transit')
-                            <form action="{{ route('allocation.updateStatus', $delivery->id) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('POST')
-                                <input type="hidden" name="status" value="delivered">
-                                <button type="submit" class="btn btn-success btn-sm">Mark as Delivered</button>
-                            </form>
-                        @else
-                            <span class="text-muted">No further actions</span>
+                        <form method="POST" action="{{ route('allocation.confirmCode', $delivery->id) }}">
+                            @csrf
+                            <input type="text" name="confirmation_code" placeholder="Enter confirmation code" required>
+                            <button type="submit">Confirm Delivery</button>
+                        </form>
                         @endif
                     </td>
                 </tr>
