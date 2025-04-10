@@ -46,6 +46,13 @@ class AllocationController extends Controller
         return redirect()->route('department.allocations')->with('success', 'Stationery allocated successfully');
     }
 
+    public function myDeliveries()
+{
+    $deliveries = Auth::user()->deliveries()->with(['school', 'stationery'])->get();
+
+    return view('contractor.my-deliveries', compact('deliveries'));
+}
+
     public function updateStatus(Request $request, $id)
 {
     $request->validate([
@@ -75,4 +82,5 @@ public function confirmDelivery($id)
 }
 
 }
+
 

@@ -1,93 +1,59 @@
+
 @extends('layouts.app')
 
-@section('title', 'Upcoming Deliveries')
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Tempusdominus Bootstrap 4 -->
-  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- JQVMap -->
-  <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
-  <!-- summernote -->
-  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
-</head>
+@section('title', 'My Deliveries')
 
 @section('content')
-<body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
-    
-      <!-- Preloader -->
-      <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-      </div>
-      
-      <div class="container">
-        <h3 class="text-primary">🚚 My Deliveries</h3>
-        <table class="table">
-            <thead>
+<div class="container py-4">
+    <h3 class="text-primary mb-4">🚚 My Deliveries</h3>
+
+    @if (session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
+    <table class="table table-bordered bg-white shadow-sm">
+        <thead class="thead-light">
+            <tr>
+                <th>School</th>
+                <th>Stationery</th>
+                <th>Quantity</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse (Auth::user()->deliveries as $delivery)
                 <tr>
-                    <th>School</th>
-                    <th>Stationery</th>
-                    <th>Quantity</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <td>{{ $delivery->school->name ?? 'N/A' }}</td>
+                    <td>{{ $delivery->stationery->name ?? 'N/A' }}</td>
+                    <td>{{ $delivery->quantity }}</td>
+                    <td><strong>{{ ucfirst(str_replace('_', ' ', $delivery->status)) }}</strong></td>
+                    <td>
+                        @if ($delivery->status === 'pending')
+                            <form action="{{ route('allocation.updateStatus', $delivery->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('POST')
+                                <input type="hidden" name="status" value="in_transit">
+                                <button type="submit" class="btn btn-warning btn-sm">Mark as In Transit</button>
+                            </form>
+                        @elseif ($delivery->status === 'in_transit')
+                            <form action="{{ route('allocation.updateStatus', $delivery->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('POST')
+                                <input type="hidden" name="status" value="delivered">
+                                <button type="submit" class="btn btn-success btn-sm">Mark as Delivered</button>
+                            </form>
+                        @else
+                            <span class="text-muted">No further actions</span>
+                        @endif
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (Auth::user()->deliveries as $delivery)
-                    <tr>
-                        <td>{{ $delivery->school->name }}</td>
-                        <td>{{ $delivery->stationery->name }}</td>
-                        <td>{{ $delivery->quantity }}</td>
-                        <td>{{ ucfirst($delivery->status) }}</td>
-                        {{-- <td>
-                            @if ($delivery->status === 'pending')
-                                <form action="{{ route('allocation.updateStatus', $delivery->id) }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    <input type="hidden" name="status" value="in_transit">
-                                    <button type="submit" class="btn btn-warning">Mark as In Transit</button>
-                                </form>
-                            @elseif ($delivery->status === 'in_transit')
-                                <form action="{{ route('allocation.updateStatus', $delivery->id) }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    <input type="hidden" name="status" value="delivered">
-                                    <button type="submit" class="btn btn-success">Mark as Delivered</button>
-                                </form>
-                            @endif
-                        </td> --}}
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-      </div>
-    </div>
-<style>
-    .content { 
-      padding: 20px; 
-      background: #f4f4f9; 
-    }
-    </style>
-</body>
+            @empty
+                <tr>
+                    <td colspan="5">No deliveries assigned.</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
 @endsection
-</html>

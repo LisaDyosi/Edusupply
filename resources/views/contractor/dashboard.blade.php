@@ -65,30 +65,6 @@
         </div>
     </section>
 </div>
-{{-- 
-<div class="container">
-  <h3 class="text-primary">🚚 My Deliveries</h3>
-  <table class="table">
-      <thead>
-          <tr>
-              <th>School</th>
-              <th>Stationery</th>
-              <th>Quantity</th>
-              <th>Status</th>
-          </tr>
-      </thead>
-      <tbody>
-          @foreach (Auth::user()->deliveries as $delivery)
-              <tr>
-                  <td>{{ $delivery->school->name }}</td>
-                  <td>{{ $delivery->stationery->name }}</td>
-                  <td>{{ $delivery->quantity }}</td>
-                  <td>{{ ucfirst($delivery->status) }}</td>
-              </tr>
-          @endforeach
-      </tbody>
-  </table>
-</div>  --}}
 
 <style>
 

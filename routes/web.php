@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AllocationController;
+use App\Http\Controllers\ContractorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,3 +60,7 @@ Route::middleware(['auth', 'checkRole:contractor'])->group(function () {
     })->name('contractor.my.deliveries');
 });
 
+Route::middleware(['auth', 'checkRole:contractor'])->group(function () {
+    Route::get('/contractor/my-deliveries', [AllocationController::class, 'myDeliveries'])->name('contractor.my.deliveries');
+    Route::post('/allocation/update-status/{id}', [AllocationController::class, 'updateStatus'])->name('allocation.updateStatus');
+});
