@@ -29,13 +29,19 @@
                                 <span class="text-muted">N/A</span>
                             @endif
                         </td>
+                        <td>
+                            {{ ucfirst($allocation->status) }}
+                            @if($allocation->status_updated_at)
+                                <br><small class="text-muted">Updated: {{ $allocation->status_updated_at->format('d M Y, H:i') }}</small>
+                            @endif
+                        </td>
                     </tr>
                 @endforeach
             @else
                 <tr>
                     <td colspan="4">No deliveries found.</td>
                 </tr>
-            @endif
+            @endif 
         </tbody>
     </table>
 </div>

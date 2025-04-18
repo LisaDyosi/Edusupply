@@ -15,7 +15,12 @@ class Allocation extends Model
         'contractor_id',
         'quantity',
         'status',
-        'confirmation_code'
+        'confirmation_code',
+        'status_updated_at'
+    ];
+
+    protected $casts = [
+        'status_updated_at' => 'datetime',
     ];
 
     public function stationery()

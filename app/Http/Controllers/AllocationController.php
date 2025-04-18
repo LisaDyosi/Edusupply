@@ -55,12 +55,11 @@ class AllocationController extends Controller
     }
 
     public function updateStatus(Request $request, $id)
-    {
+{
     $request->validate([
         'status' => 'required|in:in_transit,delivered',
     ]);
 
-    
     $allocation = Allocation::findOrFail($id);
 
     if (Auth::user()->role === 'contractor') {
@@ -68,10 +67,11 @@ class AllocationController extends Controller
             $code = rand(10000, 99999);
             $allocation->update([
                 'status' => 'in_transit',
-                'confirmation_code' => $code
+                'confirmation_code' => $code,
+                'status_updated_at' => now(),
             ]);
         } elseif ($request->status === 'delivered') {
-            // Only allow status change to delivered through the new method with code
+            
             return back()->withErrors(['error' => 'Use the confirmation code to mark as delivered.']);
         }
 
@@ -80,6 +80,7 @@ class AllocationController extends Controller
 
     return back()->withErrors(['error' => 'Unauthorized action']);
 }
+
 
 public function confirmDelivery($id)
 {
@@ -112,6 +113,17 @@ public function confirmWithCode(Request $request, $id)
 
     return back()->withErrors(['error' => 'Unauthorized action']);
 }
+
+public function receivedDeliveries()
+{
+    $received = Auth::user()->allocations()
+        ->where('status', 'delivered')
+        ->with('stationery', 'contractor')
+        ->get();
+
+    return view('school.received', compact('received'));
+}
+
 
 }
 

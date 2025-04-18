@@ -66,3 +66,5 @@ Route::middleware(['auth', 'checkRole:contractor'])->group(function () {
 });
 
 Route::post('/allocation/confirm-code/{id}', [AllocationController::class, 'confirmWithCode'])->name('allocation.confirmCode');
+
+Route::get('/school/received-stationery', [AllocationController::class, 'receivedDeliveries'])->name('school.received');

@@ -19,6 +19,8 @@
                 <th>Quantity</th>
                 <th>Status</th>
                 <th>Action</th>
+                <th>Status</th>
+                <th>Updated At:</th>
             </tr>
         </thead>
         <tbody>
@@ -44,6 +46,10 @@
                         </form>
                         @endif
                     </td>
+                    <td>{{ ucfirst($delivery->status) }}</td>
+                    <td>{{ $delivery->status_updated_at ? $delivery->status_updated_at->format('M d, Y H:i') : 'N/A' }}</td>
+
+
                 </tr>
             @empty
                 <tr>
