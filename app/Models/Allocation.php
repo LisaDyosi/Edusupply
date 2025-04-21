@@ -16,7 +16,8 @@ class Allocation extends Model
         'quantity',
         'status',
         'confirmation_code',
-        'status_updated_at'
+        'status_updated_at',
+        'delivered_quantity',
     ];
 
     protected $casts = [
@@ -37,4 +38,14 @@ class Allocation extends Model
     {
         return $this->belongsTo(User::class, 'contractor_id');
     }
+
+    public function getDiscrepancyAttribute()
+    {
+    if ($this->delivered_quantity === null) {
+        return null;
+    }
+
+    return $this->quantity - $this->delivered_quantity;
+    }
+
 }

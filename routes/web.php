@@ -68,3 +68,9 @@ Route::middleware(['auth', 'checkRole:contractor'])->group(function () {
 Route::post('/allocation/confirm-code/{id}', [AllocationController::class, 'confirmWithCode'])->name('allocation.confirmCode');
 
 Route::get('/school/received-stationery', [AllocationController::class, 'receivedDeliveries'])->name('school.received');
+
+Route::get('/allocation/{allocation}/log-delivery', [AllocationController::class, 'logDeliveryForm'])->name('allocation.logDeliveryForm');
+Route::post('/allocation/{allocation}/log-delivery', [AllocationController::class, 'saveDelivery'])->name('allocation.saveDelivery');
+Route::patch('/allocation/{allocation}/update-discrepancy-status', [AllocationController::class, 'updateDiscrepancyStatus'])->name('allocation.updateDiscrepancyStatus');
+
+Route::post('/allocation/{allocation}/log-discrepancy', [App\Http\Controllers\AllocationController::class, 'logDiscrepancy'])->name('allocation.logDiscrepancy');

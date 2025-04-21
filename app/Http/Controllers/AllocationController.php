@@ -82,17 +82,27 @@ class AllocationController extends Controller
 }
 
 
-public function confirmDelivery($id)
+public function confirmDelivery(Request $request, $id)
 {
     $allocation = Allocation::findOrFail($id);
 
     if (Auth::user()->role === 'school' && $allocation->status === 'delivered') {
-        $allocation->update(['status' => 'confirmed']);
-        return back()->with('success', 'Delivery confirmed');
+        $request->validate([
+            'delivered_quantity' => 'required|integer|min:0'
+        ]);
+
+        $allocation->update([
+            'status' => 'confirmed',
+            'delivered_quantity' => $request->delivered_quantity,
+            'status_updated_at' => now()
+        ]);
+
+        return back()->with('success', 'Delivery confirmed and quantity recorded.');
     }
 
-    return back()->withErrors(['error' => 'Unauthorized action']);
+    return back()->withErrors(['error' => 'Unauthorized action or invalid status.']);
 }
+
 
 public function confirmWithCode(Request $request, $id)
 {
@@ -122,6 +132,51 @@ public function receivedDeliveries()
         ->get();
 
     return view('school.received', compact('received'));
+}
+
+public function logDeliveryForm(Allocation $allocation)
+{
+    return view('school.log-delivery', compact('allocation'));
+}
+
+public function saveDelivery(Request $request, Allocation $allocation)
+{
+    $request->validate([
+        'delivered_quantity' => 'required|integer|min:0',
+    ]);
+
+    $discrepancy = $allocation->quantity - $request->delivered_quantity;
+
+    $allocation->discrepancy = $discrepancy;
+    $allocation->discrepancy_status = 'Pending';
+    $allocation->save();
+
+    return redirect()->route('school.received')->with('success', 'Delivery logged and discrepancy calculated.');
+}
+
+
+public function updateDiscrepancyStatus(Request $request, Allocation $allocation)
+{
+    $request->validate([
+        'discrepancy_status' => 'required|in:Pending,Attending,Fixed',
+    ]);
+
+    $allocation->discrepancy_status = $request->discrepancy_status;
+    $allocation->save();
+
+    return back()->with('success', 'Discrepancy status updated.');
+}
+public function logDiscrepancy(Request $request, Allocation $allocation)
+{
+    $request->validate([
+        'discrepancy' => 'required|integer|min:0',
+    ]);
+
+    $allocation->discrepancy = $request->discrepancy;
+    $allocation->discrepancy_status = 'pending';  // Default to pending
+    $allocation->save();
+
+    return redirect()->back()->with('success', 'Discrepancy recorded successfully.');
 }
 
 

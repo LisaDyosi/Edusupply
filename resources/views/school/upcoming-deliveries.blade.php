@@ -13,6 +13,7 @@
                 <th>Quantity</th>
                 <th>Status</th>
                 <th>Confirmation Code</th>
+                <th>Updated at:</th>
             </tr>
         </thead>
         <tbody>
@@ -30,7 +31,6 @@
                             @endif
                         </td>
                         <td>
-                            {{ ucfirst($allocation->status) }}
                             @if($allocation->status_updated_at)
                                 <br><small class="text-muted">Updated: {{ $allocation->status_updated_at->format('d M Y, H:i') }}</small>
                             @endif

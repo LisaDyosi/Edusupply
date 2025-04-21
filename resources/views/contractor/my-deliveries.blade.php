@@ -21,6 +21,8 @@
                 <th>Action</th>
                 <th>Status</th>
                 <th>Updated At:</th>
+                <th>Discrepancy</th>
+                <th>Discrepancy Status</th>
             </tr>
         </thead>
         <tbody>
@@ -48,7 +50,8 @@
                     </td>
                     <td>{{ ucfirst($delivery->status) }}</td>
                     <td>{{ $delivery->status_updated_at ? $delivery->status_updated_at->format('M d, Y H:i') : 'N/A' }}</td>
-
+                    <td>{{ $delivery->discrepancy !== null ? $delivery->discrepancy : 'N/A' }}</td>
+                    <td>{{ ucfirst($delivery->discrepancy_status) }}</td>
 
                 </tr>
             @empty

@@ -52,7 +52,7 @@
       </div>
 
       <div class="card">
-          <h3>📩 Requests from Schools</h3>
+          <h3>📩 Requests</h3>
           <button class="btn">View Requests</button>
       </div>
 
