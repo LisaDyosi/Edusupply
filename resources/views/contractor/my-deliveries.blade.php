@@ -4,13 +4,15 @@
 @section('title', 'My Deliveries')
 
 @section('content')
-<div class="container py-4">
+<div class="dashboard-heading">
     <h3 class="text-primary mb-4">🚚 My Deliveries</h3>
 
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
+</div>
+<div class="container py-4">
     <table class="table table-bordered bg-white shadow-sm">
         <thead class="thead-light">
             <tr>

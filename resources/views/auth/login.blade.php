@@ -37,11 +37,11 @@
         justify-content: center;
         align-items: center;
         background: #f1f4f9;
-    }
+    } 
 
     .login-container {
-        width: 100%;
-        max-height: 300px;
+        width: 50%;
+        max-height: 500px;
         border-radius: 10px;
     }
 

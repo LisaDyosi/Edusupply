@@ -173,7 +173,7 @@ public function logDiscrepancy(Request $request, Allocation $allocation)
     ]);
 
     $allocation->discrepancy = $request->discrepancy;
-    $allocation->discrepancy_status = 'pending';  // Default to pending
+    $allocation->discrepancy_status = 'pending';  
     $allocation->save();
 
     return redirect()->back()->with('success', 'Discrepancy recorded successfully.');

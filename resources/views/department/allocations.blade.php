@@ -3,10 +3,11 @@
 @section('title', 'Allocations')
 
 @section('content')
-<div class="container">
+    <div class="dashboard-heading">
     <h3 class="text-primary">📦 Stationery Allocations</h3>
     <a href="{{ route('allocation.create') }}" class="btn btn-success mb-3">➕ Allocate Stationery</a>
-
+    </div>
+ <div class="container">
     <table class="table">
         <thead>
             <tr>
@@ -32,6 +33,7 @@
                         @if (auth()->user()->role === 'department')
                             <form action="{{ route('allocation.updateDiscrepancyStatus', $allocation->id) }}" method="POST" class="d-flex">
                                 @csrf
+                                @method('PATCH')
                                 <select name="discrepancy_status" class="form-select form-select-sm me-2">
                                     <option value="pending" {{ $allocation->discrepancy_status === 'pending' ? 'selected' : '' }}>Pending</option>
                                     <option value="attending" {{ $allocation->discrepancy_status === 'attending' ? 'selected' : '' }}>Attending</option>

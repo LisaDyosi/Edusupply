@@ -74,3 +74,27 @@ Route::post('/allocation/{allocation}/log-delivery', [AllocationController::clas
 Route::patch('/allocation/{allocation}/update-discrepancy-status', [AllocationController::class, 'updateDiscrepancyStatus'])->name('allocation.updateDiscrepancyStatus');
 
 Route::post('/allocation/{allocation}/log-discrepancy', [App\Http\Controllers\AllocationController::class, 'logDiscrepancy'])->name('allocation.logDiscrepancy');
+
+Route::get('/system-overview', function () {
+    return view('systemoverview');
+})->name('system.overview');
+
+Route::get('/user-roles', function () {
+    return view('userroles');
+})->name('user.roles');
+
+Route::get('/system-overview', function () {
+    return view('systemoverview');
+})->name('system.overview');
+
+Route::get('/system-overview', function () {
+    return view('systemoverview');
+})->name('system.overview');
+
+Route::get('/guidelines', function () {
+    return view('guidelines');
+})->name('guidelines');
+
+Route::get('/support', function () {
+    return view('support');
+})->name('support');

@@ -3,9 +3,10 @@
 @section('title', 'Upcoming Deliveries')
 
 @section('content')
-<div class="container mt-4">
+<div class="dashboard-heading">
     <h3 class="text-primary">📦 Upcoming Deliveries</h3>
-
+</div>
+<div class="container mt-4">
     <table class="table table-bordered">
         <thead>
             <tr>

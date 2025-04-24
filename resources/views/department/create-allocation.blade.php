@@ -3,9 +3,10 @@
 @section('title', 'Allocate Stationery')
 
 @section('content')
-<div class="container">
+<div class="dashboard-heading">
     <h3 class="text-success">➕ Allocate Stationery</h3>
-
+</div>
+ <div class="container">
     <form action="{{ route('allocation.store') }}" method="POST">
         @csrf
         <div class="mb-3">

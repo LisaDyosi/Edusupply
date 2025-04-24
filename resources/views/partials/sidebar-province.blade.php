@@ -21,7 +21,6 @@
               </p>
             </a>
           </li>
-        
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
@@ -54,22 +53,6 @@
               </p>
             </a>
           </li>
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                Reports & Logs
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                Delivery Tracking
-              </p>
-            </a>
-          </li> 
       </nav>
       <!-- /.sidebar-menu -->
     </div>

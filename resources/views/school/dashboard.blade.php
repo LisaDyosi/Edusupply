@@ -63,7 +63,7 @@
 
         <div class="card">
             <h3>⚠️ Discrepancy Reports</h3>
-            <button class="btn">Log Missing Items</button>
+            <button class="btn">View Results</button>
         </div>
     </section>
 </div> 

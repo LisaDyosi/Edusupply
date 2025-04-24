@@ -51,14 +51,8 @@
 
         <div class="card">
             <h3>✅ Confirm Delivery</h3>
-            <button class="btn">Enter Confirmation</button>
+            <button class="btn">Enter Confirmation Code</button>
         </div>
-
-        <div class="card">
-            <h3>⚠️ Discrepancy Reports</h3>
-            <button class="btn">Report Issues</button>
-        </div>
-
         <div class="card">
             <h3>📬 Messaging</h3>
             <button class="btn">Contact Schools</button>

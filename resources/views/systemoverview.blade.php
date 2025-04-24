@@ -165,7 +165,8 @@
         }
 
         .container {
-            max-width: 1200px;
+            /* max-width: 1200px; */
+            max-width: 900px;
         }
 
         .flex-container {
