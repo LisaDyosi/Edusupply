@@ -166,6 +166,7 @@ public function updateDiscrepancyStatus(Request $request, Allocation $allocation
 
     return back()->with('success', 'Discrepancy status updated.');
 }
+
 public function logDiscrepancy(Request $request, Allocation $allocation)
 {
     $request->validate([

@@ -39,13 +39,13 @@ class Allocation extends Model
         return $this->belongsTo(User::class, 'contractor_id');
     }
 
-    public function getDiscrepancyAttribute()
-    {
-    if ($this->delivered_quantity === null) {
-        return null;
-    }
+    // public function getDiscrepancyAttribute()
+    // {
+    // if ($this->delivered_quantity === null) {
+    //     return 0;
+    // }
 
-    return $this->quantity - $this->delivered_quantity;
-    }
+    // return $this->quantity - $this->delivered_quantity;
+    // }
 
 }

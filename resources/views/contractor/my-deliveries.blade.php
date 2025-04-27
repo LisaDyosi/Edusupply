@@ -21,7 +21,6 @@
                 <th>Quantity</th>
                 <th>Status</th>
                 <th>Action</th>
-                <th>Status</th>
                 <th>Updated At:</th>
                 <th>Discrepancy</th>
                 <th>Discrepancy Status</th>
@@ -43,25 +42,24 @@
                                 <button type="submit" class="btn btn-warning btn-sm">Mark as In Transit</button>
                             </form>
                         @elseif ($delivery->status === 'in_transit')
-                        <form method="POST" action="{{ route('allocation.confirmCode', $delivery->id) }}">
-                            @csrf
-                            <input type="text" name="confirmation_code" placeholder="Enter confirmation code" required>
-                            <button type="submit">Confirm Delivery</button>
-                        </form>
+                            <form method="POST" action="{{ route('allocation.confirmCode', $delivery->id) }}">
+                                @csrf
+                                <input type="text" name="confirmation_code" placeholder="Enter confirmation code" required>
+                                <button type="submit">Confirm Delivery</button>
+                            </form>
                         @endif
                     </td>
-                    <td>{{ ucfirst($delivery->status) }}</td>
                     <td>{{ $delivery->status_updated_at ? $delivery->status_updated_at->format('M d, Y H:i') : 'N/A' }}</td>
-                    <td>{{ $delivery->discrepancy !== null ? $delivery->discrepancy : 'N/A' }}</td>
-                    <td>{{ ucfirst($delivery->discrepancy_status) }}</td>
-
+                    <td>{{ $delivery->discrepancy }}</td>
+                    <td>{{ ucfirst($delivery->discrepancy_status) ?? 'Pending' }}</td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="5">No deliveries assigned.</td>
+                    <td colspan="10">No deliveries assigned.</td>
                 </tr>
             @endforelse
         </tbody>
+        
     </table>
 </div>
 @endsection

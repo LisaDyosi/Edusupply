@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+
 @section('content')
 <div class="dashboard-heading">
     <h3 class="text-success">📦 Received Stationery</h3>
@@ -27,20 +28,20 @@
                     <td>
                         {{ $allocation->status_updated_at ? $allocation->status_updated_at->format('d M Y, H:i') : 'Not updated yet' }}
                     </td>
-
                     <td>
-                        @if ($allocation->status === 'delivered')
-                             <form action="{{ route('allocation.logDiscrepancy', $allocation->id) }}" method="POST" class="d-flex">
-                              @csrf
-                            <input type="text" name="discrepancy" min="0" class="form-control form-control-sm me-2" required placeholder="Enter discrepancy">
-                            <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                        @if ($allocation->discrepancy === null)
+                            <form action="{{ route('allocation.logDiscrepancy', $allocation->id) }}" method="POST" style="display: flex; align-items: center;">
+                                @csrf
+                                <input type="number" name="discrepancy" min="0" 
+                                       class="form-control form-control-sm" 
+                                       style="margin-right: 10px; width: 50px;">
+                                <button type="submit" class="btn btn-sm btn-primary">Submit</button>
                             </form>
                         @else
                             {{ $allocation->discrepancy }}
                         @endif
                     </td>
-
-
+                    
                     <td>{{ ucfirst($allocation->discrepancy_status) ?? 'Pending' }}</td>
                 </tr>
             @empty
