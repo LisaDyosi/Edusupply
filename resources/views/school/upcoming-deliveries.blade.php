@@ -3,10 +3,9 @@
 @section('title', 'Upcoming Deliveries')
 
 @section('content')
-<div class="dashboard-heading">
+
     <h3 class="text-primary">📦 Upcoming Deliveries</h3>
-</div>
-<div class="container mt-4">
+
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -14,6 +13,7 @@
                 <th>Quantity</th>
                 <th>Status</th>
                 <th>Confirmation Code</th>
+                <th>Track Deliver</th>
                 <th>Updated at:</th>
             </tr>
         </thead>
@@ -32,6 +32,9 @@
                             @endif
                         </td>
                         <td>
+                            <a href="{{ route('deliveries.track', $allocation->id) }}" class="btn btn-sm btn-secondary">Track</a>
+                        </td>
+                        <td>
                             @if($allocation->status_updated_at)
                                 <br><small class="text-muted">Updated: {{ $allocation->status_updated_at->format('d M Y, H:i') }}</small>
                             @endif
@@ -45,5 +48,4 @@
             @endif 
         </tbody>
     </table>
-</div>
 @endsection

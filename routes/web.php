@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AllocationController;
-use App\Http\Controllers\ContractorController;
+use App\Http\Controllers\ProvincialDashboardController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -98,3 +99,36 @@ Route::get('/guidelines', function () {
 Route::get('/support', function () {
     return view('support');
 })->name('support');
+
+Route::prefix('department')->name('department.')->middleware('auth')->group(function () {
+    Route::get('/schools', [ProvincialDashboardController::class, 'index'])->name('schools.index');
+    Route::get('/schools/create', [ProvincialDashboardController::class, 'createSchool'])->name('schools.create');
+    Route::post('/schools', [ProvincialDashboardController::class, 'storeSchool'])->name('schools.store');
+
+    Route::get('/schools/{school}', [ProvincialDashboardController::class, 'show'])->name('schools.show');
+    Route::get('/schools/{school}/allocations/create', [ProvincialDashboardController::class, 'createAllocation'])->name('schools.allocations.create');
+    Route::post('/schools/{school}/allocations', [ProvincialDashboardController::class, 'storeAllocation'])->name('schools.allocations.store');
+
+    Route::get('/schools/{school}/edit', [ProvincialDashboardController::class, 'editSchool'])->name('schools.edit');
+    Route::patch('/schools/{school}', [ProvincialDashboardController::class, 'updateSchool'])->name('schools.update');
+    Route::delete('/schools/{school}', [ProvincialDashboardController::class, 'destroySchool'])->name('schools.destroy');
+});
+
+Route::prefix('department')->name('department.')->middleware('auth')->group(function () {
+    Route::get('/contractors', [ProvincialDashboardController::class, 'contractorsIndex'])->name('contractors.index');
+    Route::get('/contractors/create', [ProvincialDashboardController::class, 'createContractor'])->name('contractors.create');
+    Route::post('/contractors', [ProvincialDashboardController::class, 'storeContractor'])->name('contractors.store');
+    Route::get('/contractors/{contractor}', [ProvincialDashboardController::class, 'showContractor'])->name('contractors.show');
+
+    Route::get('/contractors/{contractor}/edit', [ProvincialDashboardController::class, 'editContractor'])->name('contractors.edit');
+    Route::patch('/contractors/{contractor}', [ProvincialDashboardController::class, 'updateContractor'])->name('contractors.update');
+    Route::delete('/contractors/{contractor}', [ProvincialDashboardController::class, 'destroyContractor'])->name('contractors.destroy');
+});
+
+Route::patch('/allocations/{allocation}/update-status', [AllocationController::class, 'updateDiscrepancyStatus'])
+    ->name('allocations.updateDiscrepancyStatus');
+
+Route::get('/deliveries/{allocation}/track', [AllocationController::class, 'track'])->name('deliveries.track');
+
+// Route::post('/allocations/{allocation}/status', [AllocationController::class, 'updateStatus'])->name('allocations.updateStatus');
+Route::post('/allocations/{id}/status', [AllocationController::class, 'updateStatus'])->name('allocations.updateStatus');

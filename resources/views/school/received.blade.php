@@ -2,20 +2,18 @@
 
 
 @section('content')
-<div class="dashboard-heading">
     <h3 class="text-success">📦 Received Stationery</h3>
 
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
-</div>
-<div class="container">
     <table class="table">
         <thead>
             <tr>
                 <th>Stationery</th>
-                <th>Quantity</th>
+                <th>Allocated Quantity</th>
                 <th>Delivered On</th>
+                <th>Delivered Quantity</th>
                 <th>Discrepancy</th>
                 <th>Discrepancy Status</th>
             </tr>
@@ -28,20 +26,21 @@
                     <td>
                         {{ $allocation->status_updated_at ? $allocation->status_updated_at->format('d M Y, H:i') : 'Not updated yet' }}
                     </td>
+                    <td>{{ $allocation->discrepancy }}</td>  
                     <td>
-                        @if ($allocation->discrepancy === null)
+                        @if ($allocation->delivered_quantity === null)
                             <form action="{{ route('allocation.logDiscrepancy', $allocation->id) }}" method="POST" style="display: flex; align-items: center;">
                                 @csrf
-                                <input type="number" name="discrepancy" min="0" 
+                                <input type="number" name="delivered_quantity" min="0" 
                                        class="form-control form-control-sm" 
-                                       style="margin-right: 10px; width: 50px;">
+                                       style="margin-right: 10px; width: 80px;" 
+                                       placeholder="Delivered">
                                 <button type="submit" class="btn btn-sm btn-primary">Submit</button>
                             </form>
                         @else
-                            {{ $allocation->discrepancy }}
+                            {{ $allocation->delivered_quantity }}
                         @endif
-                    </td>
-                    
+                        </td>        
                     <td>{{ ucfirst($allocation->discrepancy_status) ?? 'Pending' }}</td>
                 </tr>
             @empty
@@ -51,5 +50,4 @@
             @endforelse
         </tbody>
     </table>
-</div>
 @endsection

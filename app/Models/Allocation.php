@@ -24,6 +24,14 @@ class Allocation extends Model
         'status_updated_at' => 'datetime',
     ];
 
+    protected $dates = [
+        'in_transit_at',
+        'delivered_at',
+        'created_at',
+        'updated_at',
+    ];
+    
+
     public function stationery()
     {
         return $this->belongsTo(Stationery::class);
@@ -39,13 +47,14 @@ class Allocation extends Model
         return $this->belongsTo(User::class, 'contractor_id');
     }
 
-    // public function getDiscrepancyAttribute()
-    // {
-    // if ($this->delivered_quantity === null) {
-    //     return 0;
-    // }
+    
+    public function getDiscrepancyAttribute()
+    {
+    if ($this->delivered_quantity === null) {
+        return null;
+    }
 
-    // return $this->quantity - $this->delivered_quantity;
-    // }
+    return max(0, $this->quantity - $this->delivered_quantity);
+    }
 
 }

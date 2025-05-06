@@ -9,7 +9,7 @@ return new class extends Migration
     public function up()
 {
     Schema::table('allocations', function (Blueprint $table) {
-        $table->timestamp('in_transit_at')->nullable()->after('status_updated_at');
+        $table->timestamp('in_transit_at')->nullable()->after('status');
         $table->timestamp('delivered_at')->nullable()->after('in_transit_at');
     });
 }

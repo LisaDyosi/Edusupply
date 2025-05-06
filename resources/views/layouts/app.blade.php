@@ -26,8 +26,6 @@
         @elseif(Auth::user()->role === 'school')
             @include('partials.navbar-school')
         @endif
-    @else
-        @include('partials.navbar')
     @endauth
     
     @auth
@@ -38,8 +36,6 @@
     @elseif(Auth::user()->role === 'school')
         @include('partials.sidebar-school')
     @endif
-@else
-    @include('partials.sidebar')
 @endauth
 
     <!-- Content Wrapper -->
@@ -50,9 +46,6 @@
             </div>
         </section>
     </div>
-
-    
-    @include('partials.footer')
 
 </div>
 

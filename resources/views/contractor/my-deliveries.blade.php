@@ -4,15 +4,12 @@
 @section('title', 'My Deliveries')
 
 @section('content')
-<div class="dashboard-heading">
     <h3 class="text-primary mb-4">🚚 My Deliveries</h3>
 
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-</div>
-<div class="container py-4">
     <table class="table table-bordered bg-white shadow-sm">
         <thead class="thead-light">
             <tr>
@@ -35,9 +32,8 @@
                     <td><strong>{{ ucfirst(str_replace('_', ' ', $delivery->status)) }}</strong></td>
                     <td>
                         @if ($delivery->status === 'pending')
-                            <form action="{{ route('allocation.updateStatus', $delivery->id) }}" method="POST" class="d-inline">
+                            <form action="{{ route('allocations.updateStatus', $delivery->id) }}" method="POST" class="d-inline">
                                 @csrf
-                                @method('POST')
                                 <input type="hidden" name="status" value="in_transit">
                                 <button type="submit" class="btn btn-warning btn-sm">Mark as In Transit</button>
                             </form>
@@ -50,7 +46,7 @@
                         @endif
                     </td>
                     <td>{{ $delivery->status_updated_at ? $delivery->status_updated_at->format('M d, Y H:i') : 'N/A' }}</td>
-                    <td>{{ $delivery->discrepancy }}</td>
+                    <td>{{ $delivery->delivered_quantity }}</td>
                     <td>{{ ucfirst($delivery->discrepancy_status) ?? 'Pending' }}</td>
                 </tr>
             @empty
@@ -59,7 +55,5 @@
                 </tr>
             @endforelse
         </tbody>
-        
     </table>
-</div>
 @endsection

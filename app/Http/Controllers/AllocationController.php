@@ -55,32 +55,30 @@ class AllocationController extends Controller
     }
 
     public function updateStatus(Request $request, $id)
-{
-    $request->validate([
-        'status' => 'required|in:in_transit,delivered',
-    ]);
-
-    $allocation = Allocation::findOrFail($id);
-
-    if (Auth::user()->role === 'contractor') {
-        if ($request->status === 'in_transit') {
-            $code = rand(10000, 99999);
-            $allocation->update([
-                'status' => 'in_transit',
-                'confirmation_code' => $code,
-                'status_updated_at' => now(),
-            ]);
-        } elseif ($request->status === 'delivered') {
-            
-            return back()->withErrors(['error' => 'Use the confirmation code to mark as delivered.']);
+    {
+        $allocation = Allocation::findOrFail($id);
+    
+        $newStatus = $request->input('status');
+    
+        if (in_array($newStatus, ['pending', 'in_transit', 'delivered'])) {
+            $allocation->status = $newStatus;
+            $allocation->status_updated_at = now();
+    
+            if ($newStatus === 'in_transit') {
+                $allocation->in_transit_at = now();
+                $allocation->confirmation_code = rand(10000, 99999);
+            }
+    
+            if ($newStatus === 'delivered') {
+                $allocation->delivered_at = now();
+            }
+    
+            $allocation->save();
         }
-
-        return back()->with('success', 'Delivery status updated');
+    
+        return redirect()->back()->with('success', 'Delivery status updated.');
     }
-
-    return back()->withErrors(['error' => 'Unauthorized action']);
-}
-
+    
 
 public function confirmDelivery(Request $request, $id)
 {
@@ -158,28 +156,37 @@ public function saveDelivery(Request $request, Allocation $allocation)
 public function updateDiscrepancyStatus(Request $request, Allocation $allocation)
 {
     $request->validate([
-        'discrepancy_status' => 'required|in:Pending,Attending,Fixed',
+        'discrepancy_status' => 'required|in:pending,attending,fixed',
     ]);
 
     $allocation->discrepancy_status = $request->discrepancy_status;
     $allocation->save();
 
-    return back()->with('success', 'Discrepancy status updated.');
+    return redirect()->back()->with('success', 'Discrepancy status updated.');
 }
 
 public function logDiscrepancy(Request $request, Allocation $allocation)
 {
     $request->validate([
-        'discrepancy' => 'required|integer|min:0',
+        'delivered_quantity' => 'required|integer|min:0',
     ]);
 
-    $allocation->discrepancy = $request->discrepancy;
-    $allocation->discrepancy_status = 'pending';  
+    $allocation->delivered_quantity = $request->delivered_quantity;
+
+    $discrepancy = $allocation->quantity - $allocation->delivered_quantity;
+
+    $allocation->discrepancy = $discrepancy > 0 ? $discrepancy : 0;
+    $allocation->discrepancy_status = $discrepancy > 0 ? 'pending' : null;
+
     $allocation->save();
 
-    return redirect()->back()->with('success', 'Discrepancy recorded successfully.');
+    return redirect()->back()->with('success', 'Delivered quantity logged and discrepancy calculated.');
 }
 
+public function track(Allocation $allocation)
+{
+    return view('school.track', compact('allocation'));
+}
 
 }
 
