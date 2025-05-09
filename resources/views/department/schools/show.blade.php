@@ -48,7 +48,20 @@
             @endforeach
         </tbody>
     </table>
+    
     @else
         <p>No allocations found for this school.</p>
     @endif
+    <style>
+
+        .content-wrapper {
+            background-color: #ffffff !important;
+            min-height: 100vh;
+        }
+
+        .content {
+            padding: 20px;
+        }
+    
+        </style>
 @endsection

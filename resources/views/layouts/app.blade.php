@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Dashboard')</title>
 
-    <!-- AdminLTE CSS -->
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/app.css') }}">
-
-    
+    <link rel="stylesheet" href="{{ asset('resources/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('resources/css/custom.css') }}">
     @yield('styles')
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="{{ Auth::check() ? 'hold-transition sidebar-mini layout-fixed' : '' }}">
+
 <div class="wrapper">
 
 
@@ -41,9 +41,7 @@
     <!-- Content Wrapper -->
     <div class="content-wrapper">
         <section class="content">
-            <div class="container-fluid">
                 @yield('content')
-            </div>
         </section>
     </div>
 

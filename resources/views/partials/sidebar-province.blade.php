@@ -53,3 +53,40 @@
     </div>
     <!-- /.sidebar -->
   </aside>
+  <style>
+.main-sidebar {
+    background-color: #007bff !important; 
+}
+
+.main-sidebar .nav-link {
+    color: #ffffff !important;
+    font-weight: 500;
+}
+
+.main-sidebar .nav-link.active {
+    background-color: #0056b3 !important;
+    color: #ffffff !important;
+}
+
+.main-sidebar .nav-link:hover {
+    background-color: #0056b3 !important; 
+    color: #ffffff !important;
+}
+
+.main-sidebar .brand-link {
+    background-color: #0056b3 !important;
+    color: #ffffff !important;
+    font-weight: bold;
+}
+
+.main-sidebar .form-inline .form-control-sidebar {
+    background-color: #ffffff !important;
+    color: #333 !important;
+}
+
+.main-sidebar {
+    min-height: 100vh;
+    overflow-y: auto;
+}
+
+    </style>

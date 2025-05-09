@@ -25,8 +25,7 @@
                     <td>{{ $allocation->quantity }}</td>
                     <td>
                         {{ $allocation->status_updated_at ? $allocation->status_updated_at->format('d M Y, H:i') : 'Not updated yet' }}
-                    </td>
-                    <td>{{ $allocation->discrepancy }}</td>  
+                    </td>  
                     <td>
                         @if ($allocation->delivered_quantity === null)
                             <form action="{{ route('allocation.logDiscrepancy', $allocation->id) }}" method="POST" style="display: flex; align-items: center;">
@@ -41,6 +40,7 @@
                             {{ $allocation->delivered_quantity }}
                         @endif
                         </td>        
+                        <td>{{ $allocation->discrepancy }}</td>
                     <td>{{ ucfirst($allocation->discrepancy_status) ?? 'Pending' }}</td>
                 </tr>
             @empty
@@ -50,4 +50,24 @@
             @endforelse
         </tbody>
     </table>
+    <a href="{{ url()->previous() }}" class="btn btn-outline-secondary mb-4">← Back</a>
+    <style>
+
+    .content-wrapper {
+        background-color: #ffffff !important;
+        min-height: 100vh;
+    }
+
+    .table {
+        background-color: #ffffff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .content {
+        padding: 20px;
+    }
+
+    </style>
 @endsection

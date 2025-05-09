@@ -16,6 +16,7 @@
                 <th>Contractor</th>
                 <th>Quantity</th>
                 <th>Status</th>
+                <th>Delivered Quantity</th>
                 <th>Discrepancy</th>
                 <th>Discrepancy Status</th>
             </tr>
@@ -28,6 +29,7 @@
                     <td>{{ $allocation->contractor->name }}</td>
                     <td>{{ $allocation->quantity }}</td>
                     <td>{{ ucfirst($allocation->status) }}</td>
+                    <td>{{ $allocation->delivered_quantity }}</td>
                     <td>{{ $allocation->discrepancy }}</td>
                     <td>
                         @if (auth()->user()->role === 'department')
@@ -50,4 +52,23 @@
         </tbody>
     </table>
 </div>
+<style>
+
+    .content-wrapper {
+        background-color: #ffffff !important;
+        min-height: 100vh;
+    }
+
+    .table {
+        background-color: #ffffff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .content {
+        padding: 20px;
+    }
+
+    </style>
 @endsection

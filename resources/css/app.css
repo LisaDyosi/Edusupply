@@ -1,0 +1,68 @@
+/* ================================
+   Custom AdminLTE Theme Overrides
+   ================================ */
+
+/* ✅ Sidebar background: light blue */
+.main-sidebar, .sidebar {
+    background-color: #d0e7ff !important;
+}
+
+/* ✅ Sidebar text color */
+.sidebar a {
+    color: #000 !important;
+}
+
+/* ✅ Sidebar hover and active link */
+.nav-sidebar .nav-item > .nav-link:hover {
+    background-color: #cbe6fc !important;
+    color: #000 !important;
+}
+
+.nav-sidebar .nav-item > .nav-link.active {
+    background-color: #add8f5 !important;
+    color: #000 !important;
+}
+
+/* ✅ Navbar (top bar) background */
+.main-header {
+    background-color: #d0e7ff !important;
+    color: #000 !important;
+}
+
+/* ✅ Page background (content area, cards, footer) */
+.content-wrapper,
+.content,
+.card,
+.main-footer {
+    background-color: #ffffff !important;
+    color: #000 !important;
+}
+
+/* ✅ Table headers and body */
+.table {
+    background-color: #ffffff !important;
+    color: #000 !important;
+}
+
+.table thead {
+    background-color: #e6f3ff !important;
+}
+
+/* ✅ Remove gray borders if needed */
+.card,
+.table,
+.content-wrapper {
+    border: none !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* ✅ Optional: Button customizations (lighter look) */
+.btn-primary {
+    background-color: #339af0 !important;
+    border-color: #339af0 !important;
+}
+
+.btn-primary:hover {
+    background-color: #228be6 !important;
+    border-color: #228be6 !important;
+}

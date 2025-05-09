@@ -1,0 +1,18 @@
+
+.sidebar {
+    background-color: #0056b3 !important; 
+}
+
+.login-container .card-header,
+.login-container .btn-primary {
+    background-color: #0056b3 !important; 
+    border-color: #0056b3 !important;
+}
+
+.login-container .card-header {
+    color: #fff !important;
+}
+
+.login-container .btn-primary {
+    color: #fff !important;
+}

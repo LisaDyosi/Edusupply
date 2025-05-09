@@ -71,7 +71,7 @@
 <style>
 .content { 
   padding: 20px; 
-  background: #f4f4f9; 
+  background: #fff; 
 }
 
 .dashboard-grid { 

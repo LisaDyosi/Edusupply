@@ -36,11 +36,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background: #f1f4f9;
+        background: #fff;
     } 
 
     .login-container {
-        width: 50%;
+        width: 40%;
         max-height: 500px;
         border-radius: 10px;
     }
@@ -49,5 +49,33 @@
     .login-container input[type="password"] {
         padding: 0.75rem;
     }
+
+    .login-container .card-header {
+        background-color: #007bff !important; 
+        color: #ffffff !important;
+        border-radius: 10px 10px 0 0;
+        border-bottom: none;
+    }
+
+    .login-container .btn-primary {
+        background-color: #007bff !important;
+        border-color: #007bff !important;
+        color: #ffffff !important;
+        padding: 0.75rem;
+        border-radius: 5px;
+        font-weight: 500;
+        transition: background-color 0.3s;
+    }
+
+    .login-container .btn-primary:hover {
+        background-color: #0056b3 !important; 
+        border-color: #0056b3 !important;
+    }
+
+    .content-wrapper {
+        margin-left: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
 </style>
 @endsection
